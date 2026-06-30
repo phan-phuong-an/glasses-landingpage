@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Thêm hiệu ứng mượt mà khi đổi màu nền toàn trang mà bạn muốn */
+html, body {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  scroll-behavior: smooth;
+}

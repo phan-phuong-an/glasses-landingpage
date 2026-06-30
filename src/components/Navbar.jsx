@@ -1,0 +1,178 @@
+import React, { useState, useEffect } from "react";
+import { Moon, Sun, ChevronDown, Sparkles, Menu, X } from "lucide-react";
+
+const Navbar = () => {
+  // Trạng thái kiểm tra xem người dùng đã cuộn trang hay chưa
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Trạng thái điều khiển Mobile Menu
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Trạng thái Theme (Light / Dark)
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") || "light";
+    }
+    return "light";
+  });
+
+  // Theo dõi sự kiện cuộn trang
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Cập nhật class theme trên thẻ html
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === "dark") {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [theme]);
+
+  // Đóng mobile menu khi chuyển hướng hoặc resize màn hình lớn
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
+
+  return (
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
+        ? "bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-gray-250/50 dark:border-slate-900 shadow-sm py-3"
+        : "bg-transparent border-b border-transparent py-5"
+        }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between relative">
+
+        {/* Cụm 1: Logo */}
+        <div className="flex items-center gap-2 cursor-pointer group">
+          <div className="bg-indigo-600 dark:bg-violet-600 text-white p-1.5 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            <Sparkles size={18} className="fill-white/20" />
+          </div>
+          <span className="font-bold text-xl text-gray-900 dark:text-white tracking-tight transition-colors">
+            LenOVR
+          </span>
+        </div>
+
+        {/* Cụm 2: Menu điều hướng (Center Links) */}
+        <div className="hidden lg:flex items-center bg-gray-100/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-full p-1 border border-gray-200/40 dark:border-slate-800/60">
+          <a href="#" className="px-5 py-2 text-sm font-medium bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs rounded-full transition-all">
+            Home
+          </a>
+          <a href="#" className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors rounded-full">
+            Chat
+          </a>
+          <a href="#" className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors rounded-full">
+            Pricing
+          </a>
+          <a href="#" className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors rounded-full">
+            Contact
+          </a>
+          <div className="flex items-center gap-1 px-5 py-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white cursor-pointer transition-colors rounded-full">
+            Pages <ChevronDown size={14} className="opacity-70" />
+          </div>
+        </div>
+
+        {/* Cụm 3: Các nút hành động bên phải */}
+        <div className="flex items-center gap-4">
+          {/* Nút bật/tắt Dark Mode */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="p-2.5 rounded-full bg-white dark:bg-slate-900/60 text-gray-600 dark:text-slate-400 border border-gray-200/60 dark:border-slate-800 hover:text-gray-950 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-slate-800/80 transition-all shadow-xs cursor-pointer"
+          >
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
+          <a href="#" className="hidden sm:block text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors px-2">
+            Sign In
+          </a>
+
+          {/* Hamburger Menu Button cho mobile */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+            className="p-2.5 rounded-full text-gray-600 dark:text-slate-450 hover:text-gray-950 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-900 transition-colors lg:hidden cursor-pointer"
+          >
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+
+        {/* Panel Menu Mobile */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden absolute top-full left-0 w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg border-b border-gray-250/50 dark:border-slate-900 py-6 px-6 transition-all duration-300 shadow-xl flex flex-col gap-4 mt-3 rounded-2xl">
+            <a
+              href="#"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-2.5 text-base font-semibold bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white rounded-xl"
+            >
+              Home
+            </a>
+            <a
+              href="#"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-2.5 text-base font-medium text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white rounded-xl transition-colors"
+            >
+              Chat
+            </a>
+            <a
+              href="#"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-2.5 text-base font-medium text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white rounded-xl transition-colors"
+            >
+              Pricing
+            </a>
+            <a
+              href="#"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-2.5 text-base font-medium text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white rounded-xl transition-colors"
+            >
+              Contact
+            </a>
+            <div className="px-4 py-2.5 text-base font-medium text-gray-600 dark:text-slate-300 flex items-center justify-between cursor-pointer rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800/50">
+              <span>Pages</span>
+              <ChevronDown size={18} />
+            </div>
+
+            <div className="border-t border-gray-100 dark:border-slate-800/80 my-2 pt-4 flex flex-col gap-3">
+              <a
+                href="#"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-center py-2.5 text-sm font-semibold text-gray-700 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white"
+              >
+                Sign In
+              </a>
+            </div>
+          </div>
+        )}
+
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
