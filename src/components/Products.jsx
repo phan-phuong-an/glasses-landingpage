@@ -96,32 +96,33 @@ const Products = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-8"
         >
-        <div className="flex items-end justify-between mb-8">
-          <div>
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              Phụ Kiện & Trò Chơi
-            </h2>
-            <p className="text-gray-600 dark:text-slate-400 max-w-2xl">
-              Khám phá trọn bộ hệ sinh thái PlayStation VR2 để nâng tầm trải nghiệm thực tế ảo của bạn.
-            </p>
+          <div className="flex items-end justify-between">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                Phụ Kiện & Trò Chơi
+              </h2>
+              <p className="text-gray-600 dark:text-slate-400 max-w-2xl">
+                Khám phá trọn bộ hệ sinh thái PlayStation VR2 để nâng tầm trải nghiệm thực tế ảo của bạn.
+              </p>
+            </div>
+            <div className="hidden md:flex gap-3">
+              <button 
+                onClick={() => scroll('left')}
+                className="p-3 rounded-full bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-gray-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 dark:hover:border-indigo-400 transition-colors shadow-sm"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button 
+                onClick={() => scroll('right')}
+                className="p-3 rounded-full bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-gray-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 dark:hover:border-indigo-400 transition-colors shadow-sm"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </div>
           </div>
-          <div className="hidden md:flex gap-3">
-            <button 
-              onClick={() => scroll('left')}
-              className="p-3 rounded-full bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-gray-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 dark:hover:border-indigo-400 transition-colors shadow-sm"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button 
-              onClick={() => scroll('right')}
-              className="p-3 rounded-full bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-gray-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 dark:hover:border-indigo-400 transition-colors shadow-sm"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
-        </div>
+        </motion.div>
 
         <div className="relative -mx-6 px-6">
           <div 
