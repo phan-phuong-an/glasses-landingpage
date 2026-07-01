@@ -8,6 +8,7 @@ import Story4 from "./components/Story4.jsx";
 import Story5 from "./components/Story5.jsx";
 import Story6 from "./components/Story6.jsx";
 import Footer from "./components/Footer.jsx";
+import AIChatBox from "./components/AIChatBox.jsx";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Story6 />
 
       <Footer />
+      <AIChatBox />
     </div>
   );
 }
