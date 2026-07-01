@@ -17,27 +17,25 @@ function App() {
   return (
     <ShopProvider>
       <div className="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-800 dark:text-slate-100 transition-colors duration-300">
-      {/* 1. Navbar */}
-      <Navbar />
+        {/* 1. Navbar */}
+        <Navbar />
 
-      {/* 2. Hero section */}
-      <Hero />
+        {/* 2. Hero section */}
+        <Hero />
 
-      {/* 3. Story scrollytelling */}
-      <Story />
-      <Story2 />
-      <Story3 />
-      <Story4 />
-      <Story5 />
-      <Story6 />
-      
-      {/* 4. Products & Accessories */}
-      <Products />
-
-      <Footer />
-      <AIChatBox />
-      <CartDrawer />
-    </div>
+        {/* 3. Story scrollytelling */}
+        <Story />
+        <Story2 />
+        <Story3 />
+        <Story4 />
+        <Story5 />
+        {/* 4. Products & Accessories */}
+        <Products />
+        <Story6 />
+        <Footer />
+        <CartDrawer />
+        <AIChatBox />
+      </div>
     </ShopProvider>
   );
 }
