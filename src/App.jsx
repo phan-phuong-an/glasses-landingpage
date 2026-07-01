@@ -2,6 +2,12 @@ import React from 'react';
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import Story from "./components/Story.jsx";
+import Story2 from "./components/Story2.jsx";
+import Story3 from "./components/Story3.jsx";
+import Story4 from "./components/Story4.jsx";
+import Story5 from "./components/Story5.jsx";
+import Story6 from "./components/Story6.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
   return (
@@ -14,13 +20,13 @@ function App() {
 
       {/* 3. Story scrollytelling */}
       <Story />
+      <Story2 />
+      <Story3 />
+      <Story4 />
+      <Story5 />
+      <Story6 />
 
-      {/* 4. Footer */}
-      <footer className="max-w-7xl mx-auto px-6 py-20">
-        <div className="border-t border-gray-200/40 dark:border-slate-900 pt-10 text-center text-gray-400 dark:text-slate-600 transition-colors duration-500">
-          <p className="text-sm font-medium">© 2026 LenOVR. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

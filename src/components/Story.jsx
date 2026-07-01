@@ -143,7 +143,7 @@ const Story = () => {
 
         {/* ── 5. Các dòng chữ story ── */}
         <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-          <div className="text-center max-w-2xl px-8 relative">
+          <div className="text-center w-full max-w-2xl px-8 relative">
 
             {/* Dòng 0 */}
             <motion.p
@@ -183,7 +183,7 @@ const Story = () => {
               className="absolute inset-x-0 text-2xl md:text-3xl lg:text-4xl font-black leading-tight
                          text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400"
             >
-              Nova Vision X biến điều đó<br />thành hiện thực.
+              PlayStation VR sẽ biến điều đó<br />thành hiện thực.
             </motion.p>
 
           </div>
