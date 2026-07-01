@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Moon, Sun, ChevronDown, Sparkles, Menu, X } from "lucide-react";
+import { Moon, Sun, ChevronDown, Sparkles, Menu, X, ShoppingCart, Heart } from "lucide-react";
+import { useShop } from "../context/ShopContext";
 
 const Navbar = () => {
   // Trạng thái kiểm tra xem người dùng đã cuộn trang hay chưa
@@ -7,6 +8,9 @@ const Navbar = () => {
 
   // Trạng thái điều khiển Mobile Menu
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Lấy dữ liệu từ ShopContext
+  const { cartCount, wishlistCount, setIsDrawerOpen, setDrawerTab } = useShop();
 
   // Trạng thái Theme (Light / Dark)
   const [theme, setTheme] = useState(() => {
@@ -106,6 +110,40 @@ const Navbar = () => {
             className="p-2.5 rounded-full bg-white dark:bg-slate-900/60 text-gray-600 dark:text-slate-400 border border-gray-200/60 dark:border-slate-800 hover:text-gray-950 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-slate-800/80 transition-all shadow-xs cursor-pointer"
           >
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
+          {/* Nút Yêu thích */}
+          <button
+            onClick={() => {
+              setDrawerTab('wishlist');
+              setIsDrawerOpen(true);
+            }}
+            aria-label="Wishlist"
+            className="relative p-2.5 rounded-full bg-white dark:bg-slate-900/60 text-gray-600 dark:text-slate-400 border border-gray-200/60 dark:border-slate-800 hover:text-red-500 dark:hover:text-red-400 hover:bg-gray-50 dark:hover:bg-slate-800/80 transition-all shadow-xs cursor-pointer"
+          >
+            <Heart size={18} className={wishlistCount > 0 ? "text-red-500 fill-current" : ""} />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-slate-950">
+                {wishlistCount}
+              </span>
+            )}
+          </button>
+
+          {/* Nút Giỏ hàng */}
+          <button
+            onClick={() => {
+              setDrawerTab('cart');
+              setIsDrawerOpen(true);
+            }}
+            aria-label="Cart"
+            className="relative p-2.5 rounded-full bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+          >
+            <ShoppingCart size={18} />
+            {cartCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-pink-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-slate-950 animate-bounce-short">
+                {cartCount}
+              </span>
+            )}
           </button>
 
           <a href="#" className="hidden sm:block text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors px-2">

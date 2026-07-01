@@ -9,10 +9,14 @@ import Story5 from "./components/Story5.jsx";
 import Story6 from "./components/Story6.jsx";
 import Footer from "./components/Footer.jsx";
 import AIChatBox from "./components/AIChatBox.jsx";
+import Products from "./components/Products.jsx";
+import CartDrawer from "./components/CartDrawer.jsx";
+import { ShopProvider } from "./context/ShopContext.jsx";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-800 dark:text-slate-100 transition-colors duration-300">
+    <ShopProvider>
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-800 dark:text-slate-100 transition-colors duration-300">
       {/* 1. Navbar */}
       <Navbar />
 
@@ -26,10 +30,15 @@ function App() {
       <Story4 />
       <Story5 />
       <Story6 />
+      
+      {/* 4. Products & Accessories */}
+      <Products />
 
       <Footer />
       <AIChatBox />
+      <CartDrawer />
     </div>
+    </ShopProvider>
   );
 }
 

@@ -7,3 +7,11 @@ html, body {
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
   scroll-behavior: smooth;
 }
+
+@theme {
+  --animate-bounce-short: bounce-short 1s ease-in-out 2;
+  @keyframes bounce-short {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-25%); }
+  }
+}
