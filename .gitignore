@@ -22,8 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Environment variables - chứa API key bí mật, KHÔNG commit lên GitHub!
-.env
-.env.local
-.env.*.local
