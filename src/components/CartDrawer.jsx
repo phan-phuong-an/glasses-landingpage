@@ -27,6 +27,7 @@ const CartDrawer = () => {
     <AnimatePresence>
       {/* Backdrop */}
       <motion.div
+        key="backdrop"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -36,6 +37,7 @@ const CartDrawer = () => {
 
       {/* Drawer */}
       <motion.div
+        key="drawer"
         initial={{ x: '100%' }}
         animate={{ x: 0 }}
         exit={{ x: '100%' }}
