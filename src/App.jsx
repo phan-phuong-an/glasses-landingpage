@@ -12,6 +12,7 @@ import AIChatBox from "./components/AIChatBox.jsx";
 import Products from "./components/Products.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
 import AboutMe from "./components/AboutMe.jsx";
+import ProductPage from "./components/ProductPage.jsx";
 import { ShopProvider } from "./context/ShopContext.jsx";
 
 function App() {
@@ -52,6 +53,13 @@ function App() {
         {currentPage === "about" && (
           <>
             <AboutMe onNavigate={navigate} />
+            <Footer />
+          </>
+        )}
+
+        {currentPage === "product" && (
+          <>
+            <ProductPage />
             <Footer />
           </>
         )}

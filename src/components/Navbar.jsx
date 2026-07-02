@@ -86,27 +86,31 @@ const Navbar = ({ currentPage, onNavigate }) => {
         <div className="hidden lg:flex items-center bg-gray-100/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-full p-1 border border-gray-200/40 dark:border-slate-800/60">
           <button
             onClick={() => onNavigate('home')}
-            className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${
-              currentPage === 'home'
+            className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'home'
                 ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
                 : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
-            }`}
+              }`}
           >
             Home
           </button>
           <button
             onClick={() => onNavigate('about')}
-            className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${
-              currentPage === 'about'
+            className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'about'
                 ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
                 : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
-            }`}
+              }`}
           >
             About Me
           </button>
-          <a href="#" className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors rounded-full">
-            Pricing
-          </a>
+          <button
+            onClick={() => onNavigate('product')}
+            className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'product'
+                ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
+                : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
+              }`}
+          >
+            Product
+          </button>
           <a href="#" className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors rounded-full">
             Contact
           </a>
@@ -176,31 +180,31 @@ const Navbar = ({ currentPage, onNavigate }) => {
           <div className="lg:hidden absolute top-full left-0 w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg border-b border-gray-250/50 dark:border-slate-900 py-6 px-6 transition-all duration-300 shadow-xl flex flex-col gap-4 mt-3 rounded-2xl">
             <button
               onClick={() => { onNavigate('home'); setIsMobileMenuOpen(false); }}
-              className={`px-4 py-2.5 text-base font-semibold rounded-xl text-left transition-colors ${
-                currentPage === 'home'
+              className={`px-4 py-2.5 text-base font-semibold rounded-xl text-left transition-colors ${currentPage === 'home'
                   ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white'
                   : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
-              }`}
+                }`}
             >
               Home
             </button>
             <button
               onClick={() => { onNavigate('about'); setIsMobileMenuOpen(false); }}
-              className={`px-4 py-2.5 text-base font-medium rounded-xl text-left transition-colors ${
-                currentPage === 'about'
+              className={`px-4 py-2.5 text-base font-medium rounded-xl text-left transition-colors ${currentPage === 'about'
                   ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
                   : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
-              }`}
+                }`}
             >
               About Me
             </button>
-            <a
-              href="#"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-2.5 text-base font-medium text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white rounded-xl transition-colors"
+            <button
+              onClick={() => { onNavigate('product'); setIsMobileMenuOpen(false); }}
+              className={`px-4 py-2.5 text-base font-medium rounded-xl text-left transition-colors ${currentPage === 'product'
+                  ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
+                  : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
+                }`}
             >
-              Pricing
-            </a>
+              Product
+            </button>
             <a
               href="#"
               onClick={() => setIsMobileMenuOpen(false)}
