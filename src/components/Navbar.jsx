@@ -87,8 +87,8 @@ const Navbar = ({ currentPage, onNavigate }) => {
           <button
             onClick={() => onNavigate('home')}
             className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'home'
-                ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
-                : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
+              ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
+              : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
               }`}
           >
             Home
@@ -96,8 +96,8 @@ const Navbar = ({ currentPage, onNavigate }) => {
           <button
             onClick={() => onNavigate('about')}
             className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'about'
-                ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
-                : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
+              ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
+              : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
               }`}
           >
             About Me
@@ -105,8 +105,8 @@ const Navbar = ({ currentPage, onNavigate }) => {
           <button
             onClick={() => onNavigate('product')}
             className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'product'
-                ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
-                : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
+              ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
+              : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
               }`}
           >
             Product
@@ -114,8 +114,8 @@ const Navbar = ({ currentPage, onNavigate }) => {
           <button
             onClick={() => onNavigate('contact')}
             className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'contact'
-                ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
-                : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
+              ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
+              : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
               }`}
           >
             Contact
@@ -167,10 +167,6 @@ const Navbar = ({ currentPage, onNavigate }) => {
             )}
           </button>
 
-          <a href="#" className="hidden sm:block text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors px-2">
-            Sign In
-          </a>
-
           {/* Hamburger Menu Button cho mobile */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -187,8 +183,8 @@ const Navbar = ({ currentPage, onNavigate }) => {
             <button
               onClick={() => { onNavigate('home'); setIsMobileMenuOpen(false); }}
               className={`px-4 py-2.5 text-base font-semibold rounded-xl text-left transition-colors ${currentPage === 'home'
-                  ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white'
-                  : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
+                ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white'
+                : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
                 }`}
             >
               Home
@@ -196,8 +192,8 @@ const Navbar = ({ currentPage, onNavigate }) => {
             <button
               onClick={() => { onNavigate('about'); setIsMobileMenuOpen(false); }}
               className={`px-4 py-2.5 text-base font-medium rounded-xl text-left transition-colors ${currentPage === 'about'
-                  ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
-                  : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
+                ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
+                : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
                 }`}
             >
               About Me
@@ -205,8 +201,8 @@ const Navbar = ({ currentPage, onNavigate }) => {
             <button
               onClick={() => { onNavigate('product'); setIsMobileMenuOpen(false); }}
               className={`px-4 py-2.5 text-base font-medium rounded-xl text-left transition-colors ${currentPage === 'product'
-                  ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
-                  : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
+                ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
+                : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
                 }`}
             >
               Product
@@ -214,8 +210,8 @@ const Navbar = ({ currentPage, onNavigate }) => {
             <button
               onClick={() => { onNavigate('contact'); setIsMobileMenuOpen(false); }}
               className={`px-4 py-2.5 text-base font-medium rounded-xl text-left transition-colors ${currentPage === 'contact'
-                  ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
-                  : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
+                ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
+                : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
                 }`}
             >
               Contact

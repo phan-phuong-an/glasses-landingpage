@@ -15,6 +15,7 @@ import psvrHorizon from "../assets/images/prod_psvr2_horizon.png";
 import senseController from "../assets/images/prod_sense_controller.png";
 import chargingDock from "../assets/images/prod_charging.png";
 import lensProtector from "../assets/images/prod_lens.png";
+import gt7VrImg from "../assets/images/gt7_vr.png";
 import fallback1 from "../assets/images/about_collage2.png";
 import fallback2 from "../assets/images/about_feature.png";
 
@@ -76,7 +77,7 @@ const ALL_PRODUCTS = [
     reviews: 3210,
     isFavorite: true,
     isSale: false,
-    badge: "Độc lập",
+    badge: null,
     img: metaQuest3,
     desc: "Standalone VR không cần PC hay console, chip Snapdragon XR2 Gen 2",
     specs: ["Snapdragon XR2 Gen 2", "Mixed Reality", "Không dây", "2064×2208/mắt", "120Hz"],
@@ -106,7 +107,7 @@ const ALL_PRODUCTS = [
     reviews: 8902,
     isFavorite: false,
     isSale: true,
-    badge: "Quốc dân",
+    badge: null,
     img: fallback2,
     desc: "Kính thực tế ảo quốc dân, giá thành tiếp cận, trải nghiệm chơi game không cần PC.",
     specs: ["Snapdragon XR2", "Độc lập không dây", "1832×1920/mắt", "90Hz", "Gọn nhẹ"],
@@ -123,7 +124,7 @@ const ALL_PRODUCTS = [
     reviews: 2890,
     isFavorite: true,
     isSale: false,
-    badge: "Bán chạy",
+    badge: null,
     img: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=500&q=80",
     desc: "Trải nghiệm đỉnh cao với màn hình 4K HDR, theo dõi mắt và phản hồi xúc giác.",
     specs: ["OLED 4K HDR", "120Hz", "Góc nhìn 110°", "Eye Tracking", "Haptic Feedback"],
@@ -138,7 +139,7 @@ const ALL_PRODUCTS = [
     reviews: 3456,
     isFavorite: true,
     isSale: false,
-    badge: "Độc lập",
+    badge: null,
     img: "https://images.unsplash.com/photo-1617802690992-15d93263d3a9?auto=format&fit=crop&w=500&q=80",
     desc: "Kính VR độc lập thế hệ mới, Mixed Reality, không cần PC hay dây cáp.",
     specs: ["Snapdragon XR2 Gen 2", "Mixed Reality", "Không dây", "2064×2208/mắt", "120Hz"],
@@ -200,7 +201,7 @@ const ALL_PRODUCTS = [
     reviews: 1876,
     isFavorite: false,
     isSale: false,
-    badge: "Bảo vệ",
+    badge: null,
     img: "https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?auto=format&fit=crop&w=500&q=80",
     desc: "Bảo vệ kính VR của bạn an toàn mọi lúc mọi nơi với lớp vỏ cứng cáp.",
     specs: ["Vỏ cứng EVA", "Chống va đập", "Ngăn phụ kiện", "Quai xách tiện lợi"],
@@ -247,7 +248,7 @@ const ALL_PRODUCTS = [
     reviews: 3456,
     isFavorite: true,
     isSale: false,
-    badge: "Bảo vệ",
+    badge: null,
     img: lensProtector,
     desc: "Bộ 3 miếng dán lens silicon, chống trầy và bụi bẩn hiệu quả",
     specs: ["Bộ 3 miếng", "Silicon mềm", "Chống trầy", "Dễ tháo lắp"],
@@ -263,7 +264,7 @@ const ALL_PRODUCTS = [
     isFavorite: false,
     isSale: true,
     badge: "Sale -25%",
-    img: senseController,
+    img: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=500&q=80",
     desc: "Dây đeo êm ái có đệm foam memory, điều chỉnh theo đầu, giảm mỏi cổ",
     specs: ["Memory Foam", "Điều chỉnh kích cỡ", "Giảm áp lực"],
   },
@@ -309,8 +310,8 @@ const ALL_PRODUCTS = [
     reviews: 6102,
     isFavorite: true,
     isSale: false,
-    badge: "Siêu phẩm",
-    img: "https://images.unsplash.com/photo-1547941126-3d5322b218b0?auto=format&fit=crop&w=500&q=80",
+    badge: null,
+    img: gt7VrImg,
     desc: "Trải nghiệm đua xe thực tế ảo chân thực nhất với hơn 400 mẫu xe chi tiết.",
     specs: ["Hỗ trợ PS VR2", "Showroom VR", "Haptic Feedback", "Đồ họa 4K HDR"],
   },
@@ -403,15 +404,15 @@ const ProductCard = ({ product }) => {
 
       {/* Product image */}
       <div
-        className="relative overflow-hidden h-52 flex items-center justify-center p-4"
+        className="relative overflow-hidden h-52 flex items-center justify-center"
         style={{ background: "linear-gradient(135deg, rgba(79,70,229,0.08), rgba(139,92,246,0.05))" }}
       >
         <img
           src={product.img}
           alt={product.name}
-          className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/60 to-transparent" />
       </div>
 
       {/* Info */}

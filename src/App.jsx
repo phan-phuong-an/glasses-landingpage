@@ -68,6 +68,7 @@ function App() {
         {currentPage === "contact" && (
           <>
             <ContactPage />
+            <Footer />
           </>
         )}
 
