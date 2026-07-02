@@ -17,19 +17,19 @@ function App() {
   return (
     <ShopProvider>
       <div className="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-800 dark:text-slate-100 transition-colors duration-300">
-        {/* 1. Navbar */}
+        {/* 1. Thanh điều hướng (Navbar) */}
         <Navbar />
 
-        {/* 2. Hero section */}
+        {/* 2. Phần Hero */}
         <Hero />
 
-        {/* 3. Story scrollytelling */}
+        {/* 3. Phần kể chuyện cuộn (Story) */}
         <Story />
         <Story2 />
         <Story3 />
         <Story4 />
         <Story5 />
-        {/* 4. Products & Accessories */}
+        {/* 4. Sản phẩm & Phụ kiện */}
         <Products />
         <Story6 />
         <Footer />
