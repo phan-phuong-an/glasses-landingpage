@@ -11,7 +11,7 @@ const starsData = Array.from({ length: 50 }).map((_, i) => ({
   delay: (i * 0.7) % 5,
 }));
 
-const Hero = () => {
+const Hero = ({ onNavigate }) => {
   const containerRef = useRef(null);
 
   // Motion values cho hover parallax
@@ -97,10 +97,18 @@ const Hero = () => {
 
           {/* Các nút CTA */}
           <div className="flex flex-wrap gap-4 items-center justify-center lg:justify-start mt-2">
-            <button className="px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold rounded-xl tracking-widest transition-all duration-300 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 active:scale-95 cursor-pointer">
+            <button
+              onClick={() => {
+                window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+              }}
+              className="px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold rounded-xl tracking-widest transition-all duration-300 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 active:scale-95 cursor-pointer"
+            >
               KHÁM PHÁ
             </button>
-            <button className="px-8 py-3.5 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-indigo-400 dark:hover:border-indigo-600 hover:text-indigo-600 dark:hover:text-indigo-400 font-semibold rounded-xl tracking-wide transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-sm">
+            <button
+              onClick={() => onNavigate && onNavigate("about")}
+              className="px-8 py-3.5 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-indigo-400 dark:hover:border-indigo-600 hover:text-indigo-600 dark:hover:text-indigo-400 font-semibold rounded-xl tracking-wide transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-sm"
+            >
               Tìm hiểu thêm →
             </button>
           </div>

@@ -175,7 +175,7 @@ const Footer = () => {
 
 
         {/* ================= CỘT PHẢI: Form ================= */}
-        <div className="w-full max-w-md mx-auto lg:ml-auto lg:mr-0">
+        <div id="register-form" className="w-full max-w-md mx-auto lg:ml-auto lg:mr-0">
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.97 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}

@@ -61,7 +61,7 @@ const Story2 = () => {
   const glowScale = useTransform(progress, [0.1, 0.5], [0.8, 1.4]);
 
   return (
-    <div ref={containerRef} className="relative h-[400vh]">
+    <div id="story2" ref={containerRef} className="relative h-[400vh]">
       {/* Sticky Viewport */}
       <motion.div
         style={{ background: backgroundStyle }}
