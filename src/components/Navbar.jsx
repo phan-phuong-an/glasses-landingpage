@@ -111,9 +111,15 @@ const Navbar = ({ currentPage, onNavigate }) => {
           >
             Product
           </button>
-          <a href="#" className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors rounded-full">
+          <button
+            onClick={() => onNavigate('contact')}
+            className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'contact'
+                ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
+                : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
+              }`}
+          >
             Contact
-          </a>
+          </button>
         </div>
 
         {/* Cụm 3: Các nút hành động bên phải */}
@@ -205,13 +211,15 @@ const Navbar = ({ currentPage, onNavigate }) => {
             >
               Product
             </button>
-            <a
-              href="#"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-2.5 text-base font-medium text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white rounded-xl transition-colors"
+            <button
+              onClick={() => { onNavigate('contact'); setIsMobileMenuOpen(false); }}
+              className={`px-4 py-2.5 text-base font-medium rounded-xl text-left transition-colors ${currentPage === 'contact'
+                  ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
+                  : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
+                }`}
             >
               Contact
-            </a>
+            </button>
 
             <div className="border-t border-gray-100 dark:border-slate-800/80 my-2 pt-4 flex flex-col gap-3">
               <a

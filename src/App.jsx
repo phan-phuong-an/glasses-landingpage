@@ -13,6 +13,7 @@ import Products from "./components/Products.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
 import AboutMe from "./components/AboutMe.jsx";
 import ProductPage from "./components/ProductPage.jsx";
+import ContactPage from "./components/ContactPage.jsx";
 import { ShopProvider } from "./context/ShopContext.jsx";
 
 function App() {
@@ -61,6 +62,12 @@ function App() {
           <>
             <ProductPage />
             <Footer />
+          </>
+        )}
+
+        {currentPage === "contact" && (
+          <>
+            <ContactPage />
           </>
         )}
 
