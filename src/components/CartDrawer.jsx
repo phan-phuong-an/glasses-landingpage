@@ -109,7 +109,7 @@ const CartDrawer = () => {
                 cart.map(item => (
                   <div key={item.id} className="flex gap-4 p-4 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl shadow-sm">
                     <div className="w-20 h-20 bg-gray-50 dark:bg-slate-900 rounded-xl p-2 flex-shrink-0">
-                      <img src={item.image} alt={item.name} className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal" />
+                      <img loading="lazy" src={item.image} alt={item.name} className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal" />
                     </div>
                     <div className="flex-1 flex flex-col justify-between">
                       <div>
@@ -148,7 +148,7 @@ const CartDrawer = () => {
               ) : (
                 wishlist.map(item => (
                   <div key={item.id} className="flex gap-4 p-4 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl shadow-sm items-center">
-                    <img src={item.image} alt={item.name} className="w-16 h-16 object-contain bg-gray-50 dark:bg-slate-900 rounded-lg p-2 mix-blend-multiply dark:mix-blend-normal" />
+                    <img loading="lazy" src={item.image} alt={item.name} className="w-16 h-16 object-contain bg-gray-50 dark:bg-slate-900 rounded-lg p-2 mix-blend-multiply dark:mix-blend-normal" />
                     <div className="flex-1">
                       <h4 className="font-semibold text-gray-900 dark:text-white line-clamp-1 text-sm">{item.name}</h4>
                       <p className="text-gray-500 dark:text-slate-400 text-xs mt-1">{formatVND(item.price)}</p>
@@ -178,7 +178,7 @@ const CartDrawer = () => {
               ) : (
                 recentlyViewed.map(item => (
                   <div key={item.id} className="flex gap-4 p-3 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-xl transition-colors cursor-pointer group items-center">
-                    <img src={item.image} alt={item.name} className="w-12 h-12 object-contain mix-blend-multiply dark:mix-blend-normal" />
+                    <img loading="lazy" src={item.image} alt={item.name} className="w-12 h-12 object-contain mix-blend-multiply dark:mix-blend-normal" />
                     <div className="flex-1">
                       <h4 className="font-medium text-gray-900 dark:text-white line-clamp-1 text-sm group-hover:text-indigo-600 transition-colors">{item.name}</h4>
                       <p className="text-gray-500 dark:text-slate-400 text-xs mt-0.5">{formatVND(item.price)}</p>

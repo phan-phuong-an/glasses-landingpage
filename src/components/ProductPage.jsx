@@ -8,16 +8,16 @@ import { Gamepad2 } from "lucide-react";
 import { useShop } from "../context/ShopContext";
 
 // ─── Ảnh import cho sản phẩm ProductPage ───
-import psvrStandard from "../assets/images/prod_psvr2_standard.png";
-import psvrGoW from "../assets/images/prod_psvr2_gow.png";
-import metaQuest3 from "../assets/images/prod_meta_quest3.png";
-import psvrHorizon from "../assets/images/prod_psvr2_horizon.png";
-import senseController from "../assets/images/prod_sense_controller.png";
-import chargingDock from "../assets/images/prod_charging.png";
-import lensProtector from "../assets/images/prod_lens.png";
-import gt7VrImg from "../assets/images/gt7_vr.png";
-import fallback1 from "../assets/images/about_collage2.png";
-import fallback2 from "../assets/images/about_feature.png";
+import psvrStandard from "../assets/images/prod_psvr2_standard.webp";
+import psvrGoW from "../assets/images/prod_psvr2_gow.webp";
+import metaQuest3 from "../assets/images/prod_meta_quest3.webp";
+import psvrHorizon from "../assets/images/prod_psvr2_horizon.webp";
+import senseController from "../assets/images/prod_sense_controller.webp";
+import chargingDock from "../assets/images/prod_charging.webp";
+import lensProtector from "../assets/images/prod_lens.webp";
+import gt7VrImg from "../assets/images/gt7_vr.webp";
+import fallback1 from "../assets/images/about_collage2.webp";
+import fallback2 from "../assets/images/about_feature.webp";
 
 // ─── Dữ liệu sản phẩm ───
 const ALL_PRODUCTS = [
@@ -407,7 +407,7 @@ const ProductCard = ({ product }) => {
         className="relative overflow-hidden h-52 flex items-center justify-center"
         style={{ background: "linear-gradient(135deg, rgba(79,70,229,0.08), rgba(139,92,246,0.05))" }}
       >
-        <img
+        <img loading="lazy"
           src={product.img}
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"

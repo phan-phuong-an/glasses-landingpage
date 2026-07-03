@@ -4,7 +4,7 @@ import {
   User, Mail, ArrowRight, CheckCircle, Gamepad2, AlertCircle,
   Code2, MessageCircle, Globe, Share2, Sparkles, Heart
 } from "lucide-react";
-import story7Bg from "../assets/images/story7_bg.png";
+import story7Bg from "../assets/images/story7_bg.webp";
 
 // 👉 Đăng ký miễn phí tại https://formspree.io → New Form → copy Form ID
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/meebrezl";
@@ -79,7 +79,7 @@ const Footer = () => {
     <footer className="relative w-full min-h-screen flex items-center justify-center overflow-hidden py-24">
       {/* ---- Ảnh nền (làm mờ) ---- */}
       <div className="absolute inset-0">
-        <img
+        <img loading="lazy"
           src={story7Bg}
           alt=""
           className="w-full h-full object-cover"

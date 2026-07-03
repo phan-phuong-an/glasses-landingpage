@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, ChevronDown, ArrowRight } from "lucide-react";
-import heroBgImg from "../assets/images/about_hero_bg.png";
-import collage1Img from "../assets/images/about_collage1.png";
-import collage2Img from "../assets/images/about_collage2.png";
-import collage3Img from "../assets/images/about_collage3.png";
-import featureImg from "../assets/images/about_feature.png";
-import learnImg from "../assets/images/about_learn.png";
+import heroBgImg from "../assets/images/about_hero_bg.webp";
+import collage1Img from "../assets/images/about_collage1.webp";
+import collage2Img from "../assets/images/about_collage2.webp";
+import collage3Img from "../assets/images/about_collage3.webp";
+import featureImg from "../assets/images/about_feature.webp";
+import learnImg from "../assets/images/about_learn.webp";
 
 // ─────────────────────────────────────────────
 // Section 1 – Hero Banner
@@ -15,7 +15,7 @@ const HeroBanner = () => (
   <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-6 py-24">
     {/* Ảnh nền làm mờ */}
     <div className="absolute inset-0">
-      <img
+      <img loading="lazy"
         src={heroBgImg}
         alt=""
         className="w-full h-full object-cover"
@@ -119,15 +119,15 @@ const NeuBanMuon = () => (
       >
         {/* Ảnh lớn chiếm full cột trái, 2 hàng */}
         <div className="row-span-2 rounded-2xl overflow-hidden border border-indigo-500/20 shadow-xl shadow-indigo-900/20 min-h-[280px]">
-          <img src={collage1Img} alt="VR World" className="w-full h-full object-cover" />
+          <img loading="lazy" src={collage1Img} alt="VR World" className="w-full h-full object-cover" />
         </div>
         {/* Ảnh nhỏ trên phải */}
         <div className="rounded-2xl overflow-hidden border border-violet-500/20 shadow-lg h-[134px]">
-          <img src={collage2Img} alt="VR Headset" className="w-full h-full object-cover" />
+          <img loading="lazy" src={collage2Img} alt="VR Headset" className="w-full h-full object-cover" />
         </div>
         {/* Ảnh nhỏ dưới phải */}
         <div className="rounded-2xl overflow-hidden border border-purple-500/20 shadow-lg h-[134px]">
-          <img src={collage3Img} alt="VR Lifestyle" className="w-full h-full object-cover" />
+          <img loading="lazy" src={collage3Img} alt="VR Lifestyle" className="w-full h-full object-cover" />
         </div>
       </motion.div>
 
@@ -260,7 +260,7 @@ const FeatureHighlight = ({ onNavigate }) => (
           className="relative rounded-2xl overflow-hidden"
           style={{ border: "1px solid rgba(99,102,241,0.3)" }}
         >
-          <img
+          <img loading="lazy"
             src={featureImg}
             alt="VR Controller"
             className="w-full h-full object-cover"
@@ -292,7 +292,7 @@ const BanSeHoc = () => (
           className="rounded-2xl overflow-hidden"
           style={{ border: "1px solid rgba(139,92,246,0.25)" }}
         >
-          <img
+          <img loading="lazy"
             src={learnImg}
             alt="VR Immersion"
             className="w-full object-cover"

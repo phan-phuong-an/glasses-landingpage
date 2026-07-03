@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Import video từ thư mục src/assets (cách Vite xử lý file local)
@@ -36,6 +36,8 @@ const gameScenes = [
 
 const Story4 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "200px" });
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev === gameScenes.length - 1 ? 0 : prev + 1));
@@ -46,7 +48,7 @@ const Story4 = () => {
   };
 
   return (
-    <section className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center">
+    <section ref={ref} className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center">
       {/* ================= BACKGROUND VIDEOS (YouTube Embeds) ================= */}
       {gameScenes.map((scene, index) => {
         const isActive = index === currentIndex;
@@ -60,14 +62,17 @@ const Story4 = () => {
             <div className="absolute inset-0 z-10 pointer-events-auto" />
 
             {/* Sử dụng thẻ video HTML5 thay vì iframe YouTube để tránh bị chặn bản quyền/localhost */}
-            <video
-              src={scene.videoUrl}
-              autoPlay
-              loop
-              muted={true}
-              playsInline
-              className="absolute w-full h-full object-cover opacity-60 pointer-events-none"
-            />
+            {isInView && (
+              <video
+                src={scene.videoUrl}
+                autoPlay
+                loop
+                muted={true}
+                playsInline
+                preload="none"
+                className="absolute w-full h-full object-cover opacity-60 pointer-events-none"
+              />
+            )}
 
             <div className="absolute inset-0 bg-gradient-to-t from-[#02020a] via-black/50 to-black/30 z-10 pointer-events-none" />
           </div>

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { User, Mail, Tag, Send } from "lucide-react";
 
 // Import hình nền do AI sinh ra
-import contactBg from "../assets/images/contact_hero_bg.png";
+import contactBg from "../assets/images/contact_hero_bg.webp";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +31,7 @@ const ContactPage = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[#050714]/60 mix-blend-multiply z-10" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#050714] via-transparent to-[#050714]/80 z-10" />
-        <img
+        <img loading="lazy"
           src={contactBg}
           alt="Cyberpunk VR Contact Background"
           className="w-full h-full object-cover object-center opacity-80"
@@ -53,7 +53,7 @@ const ContactPage = () => {
 
           {/* Nội dung Form */}
           <div className="relative bg-[#0b1021]/80 backdrop-blur-md rounded-2xl p-8 md:p-10 border border-cyan-500/30 shadow-[0_0_40px_rgba(6,182,212,0.15)]">
-            
+
             {/* Corner decorations */}
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-400 rounded-tl-2xl pointer-events-none" />
             <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-cyan-400 rounded-br-2xl pointer-events-none" />
@@ -140,7 +140,7 @@ const ContactPage = () => {
                 <Send size={16} className="relative z-10" />
               </button>
             </form>
-            
+
             {/* Branding Logo Bottom Left */}
             <div className="absolute bottom-4 left-6 text-cyan-800 font-bold text-xs flex items-center gap-2 opacity-50">
               <span className="w-4 h-4 bg-cyan-800 inline-block mask mask-squircle"></span>
