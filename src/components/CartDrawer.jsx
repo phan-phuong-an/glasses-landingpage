@@ -90,7 +90,7 @@ const CartDrawer = () => {
               : 'text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-white'
             }`}
           >
-            Đã xem
+            Đã xem ({recentlyViewed.length})
           </button>
         </div>
 
