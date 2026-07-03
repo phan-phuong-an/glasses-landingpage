@@ -58,17 +58,32 @@ const AIChatBox = () => {
 
       const prompt = `Bạn là trợ lý AI thông minh cho trang landing page về kính VR cao cấp. Hãy trả lời bằng tiếng Việt, ngắn gọn, thân thiện và hấp dẫn. Tập trung vào tính năng, trải nghiệm và lợi ích của kính VR.\n\nLịch sử trò chuyện:\n${chatContext}\n\nNgười dùng: ${userText}\nGemini AI:`;
 
-      const result = await model.generateContent(prompt);
-      const responseText = result.response.text();
+      const result = await model.generateContentStream(prompt);
 
+      // Tạo tin nhắn AI rỗng trước
+      const newAiMessageId = Date.now() + 1;
       setMessages((prev) => [
         ...prev,
         {
-          id: Date.now() + 1,
+          id: newAiMessageId,
           sender: 'ai',
-          text: responseText,
+          text: '',
         },
       ]);
+
+      // Ẩn trạng thái loading khi bắt đầu nhận stream
+      setIsLoading(false);
+
+      let fullText = '';
+      for await (const chunk of result.stream) {
+        const chunkText = chunk.text();
+        fullText += chunkText;
+        setMessages((prev) =>
+          prev.map(msg =>
+            msg.id === newAiMessageId ? { ...msg, text: fullText } : msg
+          )
+        );
+      }
     } catch (error) {
       console.error("Gemini API Error:", error);
 
@@ -152,8 +167,8 @@ const AIChatBox = () => {
                       {/* Ảnh đại diện */}
                       <div
                         className={`w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0 rounded-full flex items-center justify-center mt-auto ${msg.sender === 'user'
-                            ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md'
-                            : 'bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-slate-700 dark:to-slate-600 text-indigo-600 dark:text-purple-300 shadow-sm border border-gray-200 dark:border-slate-500/50'
+                          ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md'
+                          : 'bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-slate-700 dark:to-slate-600 text-indigo-600 dark:text-purple-300 shadow-sm border border-gray-200 dark:border-slate-500/50'
                           }`}
                       >
                         {msg.sender === 'user' ? (
@@ -166,18 +181,18 @@ const AIChatBox = () => {
                       {/* Bong bóng chat */}
                       <div
                         className={`p-3 rounded-2xl text-[13px] sm:text-sm shadow-sm overflow-hidden break-words ${msg.sender === 'user'
-                            ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-br-sm'
-                            : 'bg-white dark:bg-slate-800 text-gray-800 dark:text-gray-100 border border-gray-100 dark:border-slate-700 rounded-bl-sm'
+                          ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-br-sm'
+                          : 'bg-white dark:bg-slate-800 text-gray-800 dark:text-gray-100 border border-gray-100 dark:border-slate-700 rounded-bl-sm'
                           }`}
                       >
                         <ReactMarkdown
                           components={{
-                            p: ({node, ...props}) => <p className="mb-1.5 last:mb-0 leading-relaxed" {...props} />,
-                            strong: ({node, ...props}) => <strong className="font-semibold text-inherit" {...props} />,
-                            ul: ({node, ...props}) => <ul className="list-disc pl-4 mb-1.5 space-y-1" {...props} />,
-                            ol: ({node, ...props}) => <ol className="list-decimal pl-4 mb-1.5 space-y-1" {...props} />,
-                            li: ({node, ...props}) => <li className="leading-relaxed" {...props} />,
-                            a: ({node, href, children, ...props}) => <a href={href} className="underline hover:opacity-80 transition-opacity" target="_blank" rel="noreferrer" {...props}>{children}</a>
+                            p: ({ node, ...props }) => <p className="mb-1.5 last:mb-0 leading-relaxed" {...props} />,
+                            strong: ({ node, ...props }) => <strong className="font-semibold text-inherit" {...props} />,
+                            ul: ({ node, ...props }) => <ul className="list-disc pl-4 mb-1.5 space-y-1" {...props} />,
+                            ol: ({ node, ...props }) => <ol className="list-decimal pl-4 mb-1.5 space-y-1" {...props} />,
+                            li: ({ node, ...props }) => <li className="leading-relaxed" {...props} />,
+                            a: ({ node, href, children, ...props }) => <a href={href} className="underline hover:opacity-80 transition-opacity" target="_blank" rel="noreferrer" {...props}>{children}</a>
                           }}
                         >
                           {msg.text}

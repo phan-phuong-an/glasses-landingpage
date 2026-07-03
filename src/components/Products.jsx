@@ -192,7 +192,7 @@ const Products = () => {
                       </button>
                     </div>
                     
-                    <img 
+                    <img loading="lazy" 
                       src={product.image} 
                       alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -273,7 +273,7 @@ const Products = () => {
 
               {/* Image */}
               <div className="relative h-[280px] md:h-[320px] bg-gray-50 dark:bg-slate-800 overflow-hidden flex-shrink-0">
-                <img 
+                <img loading="lazy" 
                   src={selectedProduct.image} 
                   alt={selectedProduct.name}
                   className="w-full h-full object-cover"

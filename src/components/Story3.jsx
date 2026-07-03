@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { X } from "lucide-react";
-import story3Img from "../assets/images/story3.png";
+import story3Img from "../assets/images/story3.webp";
 
 // Định nghĩa 3 hotspot và thông tin popup
 const hotspots = [
@@ -285,7 +285,7 @@ const Story3 = () => {
           }}
           className="relative w-full h-full flex items-center justify-center"
         >
-          <img
+          <img loading="lazy"
             src={story3Img}
             alt="PlayStation VR - Chi tiết kỹ thuật"
             className="w-full h-full object-contain mix-blend-screen select-none pointer-events-none

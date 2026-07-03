@@ -10,7 +10,7 @@ export const useShop = () => {
   return context;
 };
 
-// Initial state helpers
+// Các hàm hỗ trợ cho state ban đầu
 const loadFromStorage = (key, defaultValue) => {
   try {
     const item = localStorage.getItem(key);
@@ -22,14 +22,14 @@ const loadFromStorage = (key, defaultValue) => {
 };
 
 export const ShopProvider = ({ children }) => {
-  // States
+  // Các State (Trạng thái)
   const [cart, setCart] = useState(() => loadFromStorage('psvr_cart', []));
   const [wishlist, setWishlist] = useState(() => loadFromStorage('psvr_wishlist', []));
   const [recentlyViewed, setRecentlyViewed] = useState(() => loadFromStorage('psvr_recently_viewed', []));
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [drawerTab, setDrawerTab] = useState('cart'); // 'cart', 'wishlist', 'history'
+  const [drawerTab, setDrawerTab] = useState('cart'); // 'cart' (giỏ hàng), 'wishlist' (yêu thích), 'history' (lịch sử)
 
-  // Persist to localStorage
+  // Lưu trữ vào localStorage để không bị mất dữ liệu khi tải lại trang
   useEffect(() => {
     localStorage.setItem('psvr_cart', JSON.stringify(cart));
   }, [cart]);
@@ -42,7 +42,7 @@ export const ShopProvider = ({ children }) => {
     localStorage.setItem('psvr_recently_viewed', JSON.stringify(recentlyViewed));
   }, [recentlyViewed]);
 
-  // Actions
+  // Các Hành động (Actions)
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
@@ -54,7 +54,7 @@ export const ShopProvider = ({ children }) => {
       return [...prevCart, { ...product, quantity: 1 }];
     });
     
-    // Automatically open the drawer and switch to cart tab
+    // Tự động mở menu trượt (drawer) và chuyển sang tab giỏ hàng
     setDrawerTab('cart');
     setIsDrawerOpen(true);
   };
@@ -88,9 +88,9 @@ export const ShopProvider = ({ children }) => {
 
   const addRecentlyViewed = (product) => {
     setRecentlyViewed((prev) => {
-      // Remove if already exists to move it to the top
+      // Xóa sản phẩm nếu đã tồn tại để đưa nó lên đầu danh sách
       const filtered = prev.filter((item) => item.id !== product.id);
-      // Keep only last 10 items
+      // Chỉ giữ lại 10 sản phẩm gần nhất
       return [product, ...filtered].slice(0, 10);
     });
   };

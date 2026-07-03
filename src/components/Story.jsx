@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import heroImg from "../assets/images/story1.png";
+import heroImg from "../assets/images/story1.webp";
 
 // Các ngôi sao nhỏ nền tối
 const starsData = Array.from({ length: 60 }).map((_, i) => ({
@@ -112,7 +112,7 @@ const Story = () => {
           }}
           className="absolute flex items-center justify-center"
         >
-          <img
+          <img loading="lazy"
             src={heroImg}
             alt="VR Headset"
             className="w-[520px] h-auto object-contain select-none drop-shadow-[0_0_60px_rgba(139,92,246,0.6)]"

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Eye, Volume2, Gamepad2 } from "lucide-react";
-import story2Img from "../assets/images/story2.png";
+import story2Img from "../assets/images/story2.webp";
 
 // Danh sách sao cho nền
 const starsData = Array.from({ length: 40 }).map((_, i) => ({
@@ -61,7 +61,7 @@ const Story2 = () => {
   const glowScale = useTransform(progress, [0.1, 0.5], [0.8, 1.4]);
 
   return (
-    <div ref={containerRef} className="relative h-[400vh]">
+    <div id="story2" ref={containerRef} className="relative h-[400vh]">
       {/* Sticky Viewport */}
       <motion.div
         style={{ background: backgroundStyle }}
@@ -114,7 +114,7 @@ const Story2 = () => {
               }}
               className="relative w-full max-w-[450px] md:max-w-[550px] lg:max-w-none select-none cursor-pointer flex justify-center lg:justify-start mix-blend-screen"
             >
-              <img
+              <img loading="lazy"
                 src={story2Img}
                 alt="PlayStation VR Details"
                 className="w-full lg:w-[110%] h-auto object-contain mix-blend-screen drop-shadow-[0_20px_50px_rgba(99,102,241,0.55)] lg:-translate-x-12"

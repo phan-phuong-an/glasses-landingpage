@@ -10,8 +10,29 @@ html, body {
 
 @theme {
   --animate-bounce-short: bounce-short 1s ease-in-out 2;
+  --animate-spin-slow: spin-slow 18s linear infinite;
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-fade-in-left: fade-in-left 0.7s ease-out forwards;
+  --animate-bounce-y: bounce-y 2s ease-in-out infinite;
+  
   @keyframes bounce-short {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-25%); }
+  }
+  @keyframes spin-slow {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes fade-in-left {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes bounce-y {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(8px); }
   }
 }

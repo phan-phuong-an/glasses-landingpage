@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Moon, Sun, ChevronDown, Sparkles, Menu, X, ShoppingCart, Heart } from "lucide-react";
 import { useShop } from "../context/ShopContext";
 
-const Navbar = () => {
+const Navbar = ({ currentPage, onNavigate }) => {
   // Trạng thái kiểm tra xem người dùng đã cuộn trang hay chưa
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -73,7 +73,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between relative">
 
         {/* Cụm 1: Logo */}
-        <div className="flex items-center gap-2 cursor-pointer group">
+        <div className="flex items-center gap-2 cursor-pointer group" onClick={() => onNavigate('home')}>
           <div className="bg-indigo-600 dark:bg-violet-600 text-white p-1.5 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
             <Sparkles size={18} className="fill-white/20" />
           </div>
@@ -84,21 +84,42 @@ const Navbar = () => {
 
         {/* Cụm 2: Menu điều hướng (Center Links) */}
         <div className="hidden lg:flex items-center bg-gray-100/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-full p-1 border border-gray-200/40 dark:border-slate-800/60">
-          <a href="#" className="px-5 py-2 text-sm font-medium bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs rounded-full transition-all">
+          <button
+            onClick={() => onNavigate('home')}
+            className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'home'
+              ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
+              : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
+              }`}
+          >
             Home
-          </a>
-          <a href="#" className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors rounded-full">
-            Chat
-          </a>
-          <a href="#" className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors rounded-full">
-            Pricing
-          </a>
-          <a href="#" className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors rounded-full">
+          </button>
+          <button
+            onClick={() => onNavigate('about')}
+            className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'about'
+              ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
+              : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
+              }`}
+          >
+            About Me
+          </button>
+          <button
+            onClick={() => onNavigate('product')}
+            className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'product'
+              ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
+              : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
+              }`}
+          >
+            Product
+          </button>
+          <button
+            onClick={() => onNavigate('contact')}
+            className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${currentPage === 'contact'
+              ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-xs'
+              : 'text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white'
+              }`}
+          >
             Contact
-          </a>
-          <div className="flex items-center gap-1 px-5 py-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white cursor-pointer transition-colors rounded-full">
-            Pages <ChevronDown size={14} className="opacity-70" />
-          </div>
+          </button>
         </div>
 
         {/* Cụm 3: Các nút hành động bên phải */}
@@ -146,10 +167,6 @@ const Navbar = () => {
             )}
           </button>
 
-          <a href="#" className="hidden sm:block text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-950 dark:hover:text-white transition-colors px-2">
-            Sign In
-          </a>
-
           {/* Hamburger Menu Button cho mobile */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -163,38 +180,42 @@ const Navbar = () => {
         {/* Panel Menu Mobile */}
         {isMobileMenuOpen && (
           <div className="lg:hidden absolute top-full left-0 w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg border-b border-gray-250/50 dark:border-slate-900 py-6 px-6 transition-all duration-300 shadow-xl flex flex-col gap-4 mt-3 rounded-2xl">
-            <a
-              href="#"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-2.5 text-base font-semibold bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white rounded-xl"
+            <button
+              onClick={() => { onNavigate('home'); setIsMobileMenuOpen(false); }}
+              className={`px-4 py-2.5 text-base font-semibold rounded-xl text-left transition-colors ${currentPage === 'home'
+                ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white'
+                : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
+                }`}
             >
               Home
-            </a>
-            <a
-              href="#"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-2.5 text-base font-medium text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white rounded-xl transition-colors"
+            </button>
+            <button
+              onClick={() => { onNavigate('about'); setIsMobileMenuOpen(false); }}
+              className={`px-4 py-2.5 text-base font-medium rounded-xl text-left transition-colors ${currentPage === 'about'
+                ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
+                : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
+                }`}
             >
-              Chat
-            </a>
-            <a
-              href="#"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-2.5 text-base font-medium text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white rounded-xl transition-colors"
+              About Me
+            </button>
+            <button
+              onClick={() => { onNavigate('product'); setIsMobileMenuOpen(false); }}
+              className={`px-4 py-2.5 text-base font-medium rounded-xl text-left transition-colors ${currentPage === 'product'
+                ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
+                : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
+                }`}
             >
-              Pricing
-            </a>
-            <a
-              href="#"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-2.5 text-base font-medium text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white rounded-xl transition-colors"
+              Product
+            </button>
+            <button
+              onClick={() => { onNavigate('contact'); setIsMobileMenuOpen(false); }}
+              className={`px-4 py-2.5 text-base font-medium rounded-xl text-left transition-colors ${currentPage === 'contact'
+                ? 'bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white font-semibold'
+                : 'text-gray-600 dark:text-slate-300 hover:text-gray-950 dark:hover:text-white'
+                }`}
             >
               Contact
-            </a>
-            <div className="px-4 py-2.5 text-base font-medium text-gray-600 dark:text-slate-300 flex items-center justify-between cursor-pointer rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800/50">
-              <span>Pages</span>
-              <ChevronDown size={18} />
-            </div>
+            </button>
 
             <div className="border-t border-gray-100 dark:border-slate-800/80 my-2 pt-4 flex flex-col gap-3">
               <a
