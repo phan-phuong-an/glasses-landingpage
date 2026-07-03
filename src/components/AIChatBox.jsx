@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Bot, Sparkles, User, Loader2 } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import ReactMarkdown from 'react-markdown';
 
 const AIChatBox = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ const AIChatBox = () => {
   ]);
   const messagesEndRef = useRef(null);
 
-  // Auto-scroll to bottom when new messages arrive
+  // Tự động cuộn xuống cuối khi có tin nhắn mới
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -41,7 +42,7 @@ const AIChatBox = () => {
     setIsLoading(true);
 
     try {
-      // Initialize Gemini
+      // Khởi tạo Gemini
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       if (!apiKey || apiKey === 'your_api_key_here') {
         throw new Error("API key chưa được cấu hình trong file .env.");
@@ -49,7 +50,7 @@ const AIChatBox = () => {
 
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-      // Construct a simple prompt using recent messages for context
+      // Tạo một prompt đơn giản sử dụng các tin nhắn gần đây để làm ngữ cảnh
       const chatContext = messages
         .slice(-4)
         .map(m => `${m.sender === 'ai' ? 'AI' : 'User'}: ${m.text}`)
@@ -81,6 +82,8 @@ const AIChatBox = () => {
         friendlyMessage = `🔑 Lỗi API Key (401/403). Chi tiết: ${exactError}`;
       } else if (exactError.includes("404")) {
         friendlyMessage = `❌ Lỗi 404 Model không tồn tại. Chi tiết: ${exactError}`;
+      } else if (exactError.includes("503")) {
+        friendlyMessage = `⚠️ Máy chủ Google hiện đang quá tải (Lỗi 503). Bạn vui lòng chờ một lát rồi thử lại nhé!`;
       }
 
       setMessages((prev) => [
@@ -107,7 +110,7 @@ const AIChatBox = () => {
             transition={{ duration: 0.3, type: 'spring', bounce: 0.3 }}
             className="absolute bottom-20 right-0 w-[calc(100vw-3rem)] max-w-sm sm:w-96 h-[500px] flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-slate-700/50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl"
           >
-            {/* Header */}
+            {/* Phần Header */}
             <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md z-10">
               <div className="flex items-center space-x-3">
                 <div className="relative">
@@ -131,7 +134,7 @@ const AIChatBox = () => {
               </button>
             </div>
 
-            {/* Chat Body */}
+            {/* Phần thân Chat */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent">
               <AnimatePresence>
                 {messages.map((msg) => (
@@ -146,7 +149,7 @@ const AIChatBox = () => {
                       className={`flex gap-2.5 max-w-[85%] ${msg.sender === 'user' ? 'flex-row-reverse' : 'flex-row'
                         }`}
                     >
-                      {/* Avatar */}
+                      {/* Ảnh đại diện */}
                       <div
                         className={`w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0 rounded-full flex items-center justify-center mt-auto ${msg.sender === 'user'
                             ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md'
@@ -160,14 +163,25 @@ const AIChatBox = () => {
                         )}
                       </div>
 
-                      {/* Bubble */}
+                      {/* Bong bóng chat */}
                       <div
-                        className={`p-3 rounded-2xl text-[13px] sm:text-sm shadow-sm ${msg.sender === 'user'
+                        className={`p-3 rounded-2xl text-[13px] sm:text-sm shadow-sm overflow-hidden break-words ${msg.sender === 'user'
                             ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-br-sm'
                             : 'bg-white dark:bg-slate-800 text-gray-800 dark:text-gray-100 border border-gray-100 dark:border-slate-700 rounded-bl-sm'
                           }`}
                       >
-                        {msg.text}
+                        <ReactMarkdown
+                          components={{
+                            p: ({node, ...props}) => <p className="mb-1.5 last:mb-0 leading-relaxed" {...props} />,
+                            strong: ({node, ...props}) => <strong className="font-semibold text-inherit" {...props} />,
+                            ul: ({node, ...props}) => <ul className="list-disc pl-4 mb-1.5 space-y-1" {...props} />,
+                            ol: ({node, ...props}) => <ol className="list-decimal pl-4 mb-1.5 space-y-1" {...props} />,
+                            li: ({node, ...props}) => <li className="leading-relaxed" {...props} />,
+                            a: ({node, href, children, ...props}) => <a href={href} className="underline hover:opacity-80 transition-opacity" target="_blank" rel="noreferrer" {...props}>{children}</a>
+                          }}
+                        >
+                          {msg.text}
+                        </ReactMarkdown>
                       </div>
                     </div>
                   </motion.div>
@@ -194,7 +208,7 @@ const AIChatBox = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input Area */}
+            {/* Khu vực nhập liệu */}
             <div className="p-3 sm:p-4 bg-gray-50/80 dark:bg-slate-900/80 border-t border-gray-100 dark:border-slate-700/50 backdrop-blur-md z-10">
               <form
                 onSubmit={handleSend}
@@ -220,7 +234,7 @@ const AIChatBox = () => {
         )}
       </AnimatePresence>
 
-      {/* Floating Button */}
+      {/* Nút nổi */}
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -251,7 +265,7 @@ const AIChatBox = () => {
           )}
         </AnimatePresence>
 
-        {/* Pulsating Ring */}
+        {/* Vòng sáng tỏa ra */}
         {!isOpen && (
           <span className="absolute -inset-1.5 rounded-full border-2 border-indigo-400/50 animate-ping -z-10 group-hover:border-indigo-400/80 duration-1000"></span>
         )}

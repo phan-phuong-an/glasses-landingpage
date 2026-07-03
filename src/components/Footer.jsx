@@ -10,7 +10,7 @@ import story7Bg from "../assets/images/story7_bg.png";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/meebrezl";
 
 const Footer = () => {
-  // --- Form States ---
+  // --- Các trạng thái của Form ---
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -61,7 +61,7 @@ const Footer = () => {
     }
   };
 
-  // --- Footer Links ---
+  // --- Các liên kết ở Footer ---
   const socialLinks = [
     { name: "GitHub", href: "https://github.com/", icon: Code2, label: "GitHub repository" },
     { name: "Twitter / X", href: "https://twitter.com/", icon: MessageCircle, label: "Twitter / X" },
@@ -77,7 +77,7 @@ const Footer = () => {
 
   return (
     <footer className="relative w-full min-h-screen flex items-center justify-center overflow-hidden py-24">
-      {/* ---- Background image (blurred) ---- */}
+      {/* ---- Ảnh nền (làm mờ) ---- */}
       <div className="absolute inset-0">
         <img
           src={story7Bg}
@@ -90,9 +90,9 @@ const Footer = () => {
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
 
-        {/* ================= LEFT COLUMN: Text + Footer Info ================= */}
+        {/* ================= CỘT TRÁI: Văn bản + Thông tin Footer ================= */}
         <div className="flex flex-col gap-12 max-w-xl">
-          {/* Header Text */}
+          {/* Văn bản Tiêu đề */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -115,7 +115,7 @@ const Footer = () => {
             </p>
           </motion.div>
 
-          {/* Footer Info (Logo, Socials, Legal) */}
+          {/* Thông tin Footer (Logo, Mạng xã hội, Pháp lý) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -124,7 +124,7 @@ const Footer = () => {
             className="flex flex-col gap-8 pt-8"
             style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
           >
-            {/* Row 1: Logo & Social */}
+            {/* Hàng 1: Logo & Mạng xã hội */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
               {/* Logo */}
               <div className="flex items-center gap-2.5 group cursor-pointer">
@@ -134,7 +134,7 @@ const Footer = () => {
                 <span className="font-bold text-xl text-white tracking-tight">LenOVR</span>
               </div>
 
-              {/* Social Links */}
+              {/* Liên kết mạng xã hội */}
               <div className="flex items-center gap-3">
                 {socialLinks.map((social) => {
                   const Icon = social.icon;
@@ -157,7 +157,7 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Row 2: Legal & Copyright */}
+            {/* Hàng 2: Pháp lý & Bản quyền */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 text-sm text-slate-500">
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                 {legalLinks.map((link) => (
@@ -174,7 +174,7 @@ const Footer = () => {
         </div>
 
 
-        {/* ================= RIGHT COLUMN: Form ================= */}
+        {/* ================= CỘT PHẢI: Form ================= */}
         <div className="w-full max-w-md mx-auto lg:ml-auto lg:mr-0">
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.97 }}
@@ -202,7 +202,7 @@ const Footer = () => {
                 >
                   <h3 className="text-white text-xl font-bold mb-2">Đăng ký tham gia</h3>
 
-                  {/* Name Field */}
+                  {/* Trường nhập Tên */}
                   <div className="flex flex-col gap-1.5">
                     <label className="text-slate-400 text-sm font-medium">Tên hiển thị</label>
                     <div className="relative">
@@ -234,7 +234,7 @@ const Footer = () => {
                     </AnimatePresence>
                   </div>
 
-                  {/* Email Field */}
+                  {/* Trường nhập Email */}
                   <div className="flex flex-col gap-1.5">
                     <label className="text-slate-400 text-sm font-medium">Email</label>
                     <div className="relative">
@@ -266,7 +266,7 @@ const Footer = () => {
                     </AnimatePresence>
                   </div>
 
-                  {/* Submit Button */}
+                  {/* Nút Gửi */}
                   <motion.button
                     type="submit"
                     disabled={isLoading}

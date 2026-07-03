@@ -9,27 +9,34 @@ import Story5 from "./components/Story5.jsx";
 import Story6 from "./components/Story6.jsx";
 import Footer from "./components/Footer.jsx";
 import AIChatBox from "./components/AIChatBox.jsx";
+import Products from "./components/Products.jsx";
+import CartDrawer from "./components/CartDrawer.jsx";
+import { ShopProvider } from "./context/ShopContext.jsx";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-800 dark:text-slate-100 transition-colors duration-300">
-      {/* 1. Navbar */}
-      <Navbar />
+    <ShopProvider>
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-800 dark:text-slate-100 transition-colors duration-300">
+        {/* 1. Thanh điều hướng (Navbar) */}
+        <Navbar />
 
-      {/* 2. Hero section */}
-      <Hero />
+        {/* 2. Phần Hero */}
+        <Hero />
 
-      {/* 3. Story scrollytelling */}
-      <Story />
-      <Story2 />
-      <Story3 />
-      <Story4 />
-      <Story5 />
-      <Story6 />
-
-      <Footer />
-      <AIChatBox />
-    </div>
+        {/* 3. Phần kể chuyện cuộn (Story) */}
+        <Story />
+        <Story2 />
+        <Story3 />
+        <Story4 />
+        <Story5 />
+        {/* 4. Sản phẩm & Phụ kiện */}
+        <Products />
+        <Story6 />
+        <Footer />
+        <CartDrawer />
+        <AIChatBox />
+      </div>
+    </ShopProvider>
   );
 }
 
