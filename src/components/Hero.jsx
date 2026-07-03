@@ -41,7 +41,7 @@ const Hero = ({ onNavigate }) => {
 
       {/* ─── Grid layout: text left / image right ─── */}
       <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[75vh]">
-        
+
         {/* ── CỘT TRÁI: Chữ ── */}
         <div className="flex flex-col gap-6 text-center lg:text-left items-center lg:items-start animate-fade-in-left">
           {/* Tiêu đề */}
@@ -92,7 +92,7 @@ const Hero = ({ onNavigate }) => {
 
         {/* ── CỘT PHẢI: Kính VR xoay chậm + hover nghiêng ── */}
         <div className="flex items-center justify-center relative" style={{ perspective: "1000px" }}>
-          
+
           {/* Glow vòng tròn phía sau kính */}
           <div className="absolute w-[360px] h-[360px] rounded-full bg-indigo-500/8 dark:bg-violet-600/15 blur-3xl pointer-events-none" />
 

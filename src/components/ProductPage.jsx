@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ShoppingCart, Heart, Star, SlidersHorizontal, Search,
@@ -356,14 +356,14 @@ const formatPrice = (price) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(price);
 
 // ─── Product Card ───
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onClick }) => {
   const { addToCart, toggleWishlist, isInWishlist } = useShop();
   const inWishlist = isInWishlist(product.id);
 
   return (
     <div
-
-      className="group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
+      onClick={() => onClick(product)}
+      className="group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer"
       style={{
         background: "rgba(255,255,255,0.04)",
         border: "1px solid rgba(255,255,255,0.07)",
@@ -389,7 +389,7 @@ const ProductCard = ({ product }) => {
 
       {/* Wishlist button */}
       <button
-        onClick={() => toggleWishlist(product)}
+        onClick={(e) => { e.stopPropagation(); toggleWishlist(product); }}
         className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110"
         style={{
           background: inWishlist ? "rgba(239,68,68,0.2)" : "rgba(0,0,0,0.4)",
@@ -450,7 +450,7 @@ const ProductCard = ({ product }) => {
 
         {/* Add to Cart */}
         <button
-          onClick={() => addToCart({ ...product })}
+          onClick={(e) => { e.stopPropagation(); addToCart({ ...product }); }}
           className="w-full py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200 hover:scale-105 active:scale-95"
           style={{ background: "linear-gradient(135deg, #4f46e5, #7c3aed)", boxShadow: "0 4px 12px rgba(79,70,229,0.3)" }}
         >
@@ -464,11 +464,29 @@ const ProductCard = ({ product }) => {
 
 // ─── Main ProductPage Component ───
 const ProductPage = () => {
+  const { addRecentlyViewed, addToCart, toggleWishlist, isInWishlist } = useShop();
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [activeCategory, setActiveCategory] = useState("all");
   const [activePriceRange, setActivePriceRange] = useState(0);
   const [sortOrder, setSortOrder] = useState("az");
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    if (selectedProduct) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedProduct]);
+
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    addRecentlyViewed(product);
+  };
 
   const filteredProducts = useMemo(() => {
     const priceRange = PRICE_RANGES[activePriceRange];
@@ -654,7 +672,7 @@ const ProductPage = () => {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
             >
                 {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                  <ProductCard key={product.id} product={product} onClick={handleProductClick} />
                 ))}
             </div>
           ) : (
@@ -674,6 +692,118 @@ const ProductPage = () => {
             </div>
           )}
       </main>
+
+      {/* ===== Product Detail Modal ===== */}
+      <AnimatePresence>
+        {selectedProduct && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedProduct(null)}
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[80]"
+            />
+
+            {/* Modal */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 30 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[700px] md:max-h-[85vh] bg-[#0f172a] rounded-3xl shadow-2xl z-[90] overflow-hidden flex flex-col border border-slate-800"
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className="absolute top-4 right-4 z-10 p-2 bg-slate-800/80 backdrop-blur-md text-slate-300 hover:text-white rounded-full transition-colors shadow-sm"
+              >
+                <X size={20} />
+              </button>
+
+              {/* Image */}
+              <div className="relative h-[280px] md:h-[320px] bg-[#020617] overflow-hidden flex-shrink-0">
+                <img loading="lazy" 
+                  src={selectedProduct.img || selectedProduct.image} 
+                  alt={selectedProduct.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-4 left-4">
+                  <span className="px-3 py-1.5 text-xs font-medium bg-indigo-600 text-white rounded-full shadow-md uppercase tracking-wide">
+                    {selectedProduct.category === "vr" ? "Kính VR" : selectedProduct.category === "game" ? "Game VR" : "Phụ kiện"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 md:p-8 overflow-y-auto flex-1 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                  {selectedProduct.name}
+                </h2>
+
+                <div className="flex items-center gap-1 mb-4">
+                  {[1,2,3,4,5].map(i => (
+                    <Star key={i} size={16} className={i <= Math.floor(selectedProduct.rating || 4) ? "text-amber-400 fill-current" : "text-slate-600"} />
+                  ))}
+                  <span className="text-sm text-slate-400 ml-2">({selectedProduct.rating || '4.0'} / 5.0) - {selectedProduct.reviews || 0} đánh giá</span>
+                </div>
+
+                <p className="text-slate-400 mb-6 leading-relaxed">
+                  {selectedProduct.desc || selectedProduct.description}
+                </p>
+
+                {/* Specs */}
+                {selectedProduct.specs && (
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wider">Thông số nổi bật</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProduct.specs.map((spec, i) => (
+                        <span key={i} className="px-3 py-1.5 bg-slate-800 text-slate-300 rounded-lg text-sm border border-slate-700">
+                          {spec}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Price + Actions */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-6 border-t border-slate-800">
+                  <div className="flex items-end gap-2">
+                    <span className="text-3xl font-bold text-indigo-400">
+                      {formatPrice(selectedProduct.price)}
+                    </span>
+                    {selectedProduct.originalPrice && (
+                      <span className="text-sm text-slate-500 line-through mb-1">
+                        {formatPrice(selectedProduct.originalPrice)}
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex gap-3 w-full sm:w-auto sm:ml-auto">
+                    <button
+                      onClick={() => toggleWishlist(selectedProduct)}
+                      className={`p-3 rounded-xl border transition-all ${
+                        isInWishlist(selectedProduct.id) 
+                        ? 'bg-red-900/20 border-red-800 text-red-500' 
+                        : 'border-slate-700 text-slate-400 hover:text-red-500 hover:border-red-500/50 hover:bg-red-500/10'
+                      }`}
+                    >
+                      <Heart size={20} className={isInWishlist(selectedProduct.id) ? "fill-current" : ""} />
+                    </button>
+                    <button
+                      onClick={() => { addToCart(selectedProduct); setSelectedProduct(null); }}
+                      className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold transition-all hover:shadow-lg hover:shadow-indigo-500/25 active:scale-95"
+                    >
+                      <ShoppingCart size={18} />
+                      Thêm vào giỏ
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

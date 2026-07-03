@@ -98,6 +98,17 @@ const Products = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (selectedProduct) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedProduct]);
+
   const scroll = (direction) => {
     if (!sliderRef.current) return;
     
